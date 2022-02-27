@@ -16,7 +16,6 @@
  */
 
 #define DEFLATE_BUFFER 65536
-#define ALPHA_INDEX 0 /* FIXME: read this from tRNS? */
 
 const uint8_t magic[] = { 0x89,0x50,0x4E,0x47,0x0D,0x0A,0x1A,0x0A };
 
@@ -417,4 +416,3 @@ goblin__strerror(int c)
 		return "GOBLIN_E_ZLIB_INFLATE";
 	}
 }
-
