@@ -1,14 +1,12 @@
 # goblin
 
-goblin is a simple PNG decoder written in C99 that implements just enough of
-the PNG specification to decode indexed PNG files and write the bitmap data
-into a `uint8_t *` buffer of sufficient size.
+# Description
 
-## Dependencies
+A simple PNG decoder library written in C99 that implements just enough of the
+PNG specification to decode indexed PNG files and write the bitmap data into a
+`uint8_t *` buffer of sufficient size.
 
-* [zlib](https://zlib.net)
-
-## Interface
+# Library interface
 
 ```
 int goblin__img_stat(const char *path, size_t *bytes, uint32_t *width, uint32_t *height);
@@ -18,10 +16,10 @@ const char *goblin__strerror(int);
 
 ## Usage
 
-First call `goblin__img_stat` to determine the width and height (in pixels) and the
+1. Call `goblin__img_stat` to determine the width and height (in pixels) and the
 number of bytes required for the bitmap data.
 
-Secondly call `goblin__img_load`, passing a pointer to a pre-allocated buffer
+2. Call `goblin__img_load`, passing a pointer to a pre-allocated buffer
 that will be populated with the bitmap data.
 
-Error codes can be converted to `const char *` using `goblin__strerror`.
+N.B. error codes can be converted to `const char *` using `goblin__strerror`.
