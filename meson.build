@@ -1,6 +1,6 @@
 project('goblin', ['c'],
   version: '0.1-alpha',
-  meson_version: '>=0.59.1',
+  meson_version: '>=0.53.2',
   default_options: ['warning_level=3',
                     'c_std=c99'])
 assert(host_machine.endian() == 'little')
@@ -24,5 +24,5 @@ png2tga = executable('png2tga', 'png2tga.c',
                      link_with: goblin)
 test_goblin = find_program('test_goblin.sh')
 foreach s : sizes
-  test(f'@s@ x @s@', test_goblin, args: [png2tga, s.to_string()])
+  test('@0@ x @0@'.format(s), test_goblin, args: [png2tga.full_path(), s.to_string()])
 endforeach
