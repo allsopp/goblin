@@ -10,9 +10,9 @@ libs = []
 incs = ['include']
 
 cc = meson.get_compiler('c')
-deps += cc.find_library('libz', static: true)
+deps += cc.find_library('libz')
 
-goblin = static_library('goblin', ['goblin.c'],
+goblin = shared_library('goblin', ['goblin.c'],
                         include_directories: incs,
                         dependencies: deps)
 dep = declare_dependency(include_directories: incs,
