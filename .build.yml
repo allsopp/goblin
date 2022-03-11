@@ -1,0 +1,12 @@
+image: ubuntu/lts
+packages:
+- graphicsmagick
+- libz-dev
+- meson
+- ninja-build
+sources:
+- https://github.com/allsopp/goblin.git
+tasks:
+- setup: meson setup build goblin
+- build: ninja -C build
+- test: meson test -vC build
