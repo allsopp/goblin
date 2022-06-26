@@ -9,20 +9,30 @@ deps = []
 libs = []
 incs = ['include']
 
+incs += get_option('prefix') / 'include'
+libs += get_option('prefix') / 'lib'
 cc = meson.get_compiler('c')
-deps += cc.find_library('libz')
 
-goblin = shared_library('goblin', ['goblin.c'],
-                        include_directories: incs,
-                        dependencies: deps)
+if host_machine.system() == 'windows'
+  zlib = 'zlib'
+else
+  zlib = 'libz'
+endif
+
+deps += cc.find_library(zlib, dirs: libs)
+
+goblin = static_library('goblin', ['goblin.c'],
+                 include_directories: incs,
+                 dependencies: deps)
 dep = declare_dependency(include_directories: incs,
                          link_with: goblin)
 
-sizes = [1, 2, 3, 4, 5, 6, 7, 8, 16, 32, 64, 128, 256]
 png2tga = executable('png2tga', 'png2tga.c',
                      include_directories: incs,
                      link_with: goblin)
-test_goblin = find_program('test_goblin.sh')
-foreach s : sizes
-  test('@0@ x @0@'.format(s), test_goblin, args: [png2tga.full_path(), s.to_string()])
+
+test_square = find_program('test/square.py')
+sizes = [1, 2, 3, 4, 5, 6, 7, 8, 16, 32, 64, 128, 256]
+foreach s: sizes
+  test('@0@ x @0@'.format(s), test_square, args: [png2tga.full_path(), s.to_string()], is_parallel: false)
 endforeach

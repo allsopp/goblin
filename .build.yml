@@ -1,4 +1,4 @@
-image: ubuntu/lts
+image: debian/unstable
 packages:
 - graphicsmagick
 - libz-dev

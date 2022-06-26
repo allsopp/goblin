@@ -4,6 +4,11 @@
 #include <stdio.h>
 #include <assert.h>
 
+#ifdef _WIN32
+#include <fcntl.h>
+#include <io.h>
+#endif
+
 static struct header {
 	uint8_t id_length;
 	uint8_t color_map;
@@ -19,6 +24,11 @@ main(int argc, char **argv)
 	size_t bytes;
 	uint32_t width, height, i;
 	int rs;
+
+#ifdef _WIN32
+	rs = _setmode(_fileno(stdout), O_BINARY);
+	assert(rs != -1);
+#endif
 
 	if (argc < 2) {
 		fprintf(stderr, "usage: %s <file>\n", argv[0]);
