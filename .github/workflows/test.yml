@@ -1,0 +1,12 @@
+name: test
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          sudo apt-get install graphicsmagick libz-dev meson ninja-build
+          meson setup build
+          ninja -C build
+          meson test -vC build

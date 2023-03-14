@@ -1,6 +1,6 @@
 # goblin
 
-[![builds.sr.ht status](https://builds.sr.ht/~allsopp/goblin.svg)](https://builds.sr.ht/~allsopp/goblin?)
+[![test](https://github.com/allsopp/goblin/actions/workflows/test.yml/badge.svg)](https://github.com/allsopp/goblin/actions/workflows/test.yml)
 
 Simple decoder library for indexed PNG images
 
